@@ -1,122 +1,98 @@
-let headLine,inputBox,sumbitButton,booksContainer;
-let booksList = [];
-let id=1;
+let loginButton = document.getElementById("login");
+let signUpButton = document.getElementById("signup");
+let nameFeild = document.getElementById("userName");
+let passwordFeild = document.getElementById("password");
 
-class Book{
-  constructor(name,author,year,id){
-    
-    this.id=id;
-    this.container=MyCreateElement('container','div');
-    this.name=MyCreateElement('feild','div');
-    this.name.textContent="name: "+name;
-    this.author=MyCreateElement('feild','div');
-    this.author.textContent="author: "+author;
-    this.year=MyCreateElement('feild','div');
-    this.year.textContent="year: "+year;
-    this.isAvialble=true;
-    this.isAvialbleT=MyCreateElement('feild','div');
-    this.isAvialbleT.textContent="is avialble: "+this.isAvialble;
-
-    this.delete = MyCreateElement('delete','div');
-    this.delete.textContent="delete";
-    this.delete.addEventListener('click',(event) => {
-      delete2(this);
-    });
-
-    this.borrow = MyCreateElement('borrow','div');
-    this.borrow.textContent="borrow";
-    this.borrow.addEventListener('click',(event) => {
-      borrow(this);
-    });
-    
-  }
-}
-
-function MyCreateElement(id,tpye){
-  element = document.createElement(tpye);
-  element.id=id;
-  return element;
-}
-
-function printBook(book){
-
-  book.container.appendChild(book.name);
-  book.container.appendChild(book.author);
-  book.container.appendChild(book.year);
-  book.container.appendChild(book.isAvialbleT);
-  book.container.appendChild(book.delete);
-  book.container.appendChild(book.borrow);
-  booksContainer.appendChild(book.container);
-
-}
-
-function sumbit(){
-  const boxName=document.getElementById('inputBoxName').value;
-  const boxAuthor=document.getElementById('inputBoxAuthor').value;
-  const boxYear=document.getElementById('inputBoxYear').value;
-  const newBook = new Book(boxName,boxAuthor,boxYear,id);
-  id++;
-  booksList.push(newBook);
-  printBook(newBook);
-}
-function borrow(book){
-  if(book.isAvialble){
-    book.isAvialble=false;
-    book.borrow.textContent="return";
-  }
-  else{
-    book.isAvialble=true;
-    book.borrow.textContent="borrow";
-  }
-  book.isAvialbleT.textContent="is avialble: "+book.isAvialble;
-}
-function delete2(book){
-  booksList = booksList.filter((arrBook) => arrBook.id !== book.id);
-  booksContainer.removeChild(book.container);
-}
-function search(){
-  booksContainer.innerHTML = "";
-  const name=document.getElementById('search').value;
-  const author=document.getElementById('search2').value;
-  
-  const books = booksList.filter((arrBook) => arrBook.name.textContent.substring(5).includes(name) &&
-                                              arrBook.author.textContent.substring(7).includes(author) );
-  console.log(books.length);
-  return books;
-}
-
-inputBoxName = MyCreateElement("inputBoxName",'input');
-inputBoxName.placeholder="Enter book name";
-inputBoxAuthor = MyCreateElement("inputBoxAuthor",'input');
-inputBoxAuthor.placeholder="Enter book author";
-inputBoxYear = MyCreateElement("inputBoxYear",'input');
-inputBoxYear.placeholder="Enter book year";
-document.body.appendChild(inputBoxName);
-document.body.appendChild(inputBoxAuthor);
-document.body.appendChild(inputBoxYear);
-sumbitButton = MyCreateElement("sumbitButton",'div');
-sumbitButton.textContent = "sumbit";
-sumbitButton.addEventListener('click',function (event){
-  sumbit();
+loginButton.addEventListener("click", function (event) {
+  login();
 });
-document.body.appendChild(sumbitButton);
 
-inputSearch = MyCreateElement("search",'input');
-inputSearch.placeholder="Enter book name";
-inputSearchA = MyCreateElement("search2",'input');
-inputSearchA.placeholder="Enter author name";
-document.body.appendChild(inputSearch);
-document.body.appendChild(inputSearchA);
-searchButton = MyCreateElement("searchButton",'div');
-searchButton.textContent = "search";
-searchButton.addEventListener('click',function (event){
-  
-  search().forEach((book)=>{
-    printBook(book);
+signUpButton.addEventListener("click", function (event) {
+  signup();
+});
+
+//////////////     log in     //////////////
+
+function login() {
+  let lisOfUsers = getUsersList();
+  let logName = nameFeild.value;
+  let logPassword = passwordFeild.value;
+
+  if (logName.length === 0 || logPassword.length === 0) {
+    alert("missing parameters");
+    return;
+  }
+
+  if (lisOfUsers === undefined) {
+    alert("user dosen't exist please sign up");
+    return;
+  }
+
+  let userIndex = lisOfUsers.findIndex((item) => {
+    return item.name.localeCompare(logName) == 0;
   });
-});
-document.body.appendChild(searchButton);
 
-booksContainer=MyCreateElement("booksContainer",'div');
-document.body.appendChild(booksContainer);
+  if (userIndex == -1) {
+    alert("user does not exist please sign up");
+    return;
+  }
 
+  if (lisOfUsers[userIndex].password == logPassword) {
+    window.location.href = "menu.html";
+  } else {
+    alert("the password is incorrect");
+    return;
+  }
+}
+
+//////////////     sign up     //////////////
+
+function signup() {
+  let usersList = getUsersList();
+  let newName = nameFeild.value;
+  let newPassword = passwordFeild.value;
+
+  if (newName.length === 0 || newPassword.length === 0) {
+    alert("missing parameters");
+    return;
+  }
+
+  let indexToSet = findIndexToSet(newName, usersList);
+
+  if (indexToSet !== -2) {
+    if (indexToSet === -1) {
+      usersList.push({ name: newName, password: newPassword });
+    } else {
+      usersList.splice(indexToSet, 0, { name: newName, password: newPassword });
+    }
+    localStorage.clear();
+    localStorage.setItem("usersList", JSON.stringify(usersList));
+  }
+}
+
+function findIndexToSet(newUser, usersList) {
+  if (usersList.length === 0) {
+    return -1;
+  }
+
+  let index = usersList.findIndex((item) => {
+    return item.name.localeCompare(newUser) >= 0;
+  });
+
+  if (index !== -1) {
+    if (usersList[index].name === newUser) {
+      alert("user name allredy exist");
+      return -2;
+    }
+  }
+  return index;
+}
+
+//////////////     functions     //////////////
+
+function getUsersList() {
+  if (localStorage.length === 0) {
+    return [];
+  }
+  return JSON.parse(localStorage.getItem("usersList"));
+}

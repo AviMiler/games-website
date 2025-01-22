@@ -1,0 +1,30 @@
+
+main{
+    flex: 0 0 80%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#menu{
+    width: 30%;
+    padding: 20px;
+    background-color: crimson;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10%;
+}
+.button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: orange;
+    border-radius: 50px;
+    text-align: center;
+    font-size:200%;
+    width: 60%;
+}
+.button:hover {
+    background-color: black;
+}

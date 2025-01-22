@@ -1,72 +1,33 @@
-h1{
-    text-align: center;
-    font-size: 100px;
+*{
+     /*border: 1px solid white; */
+}
+html{
+    height: 100%;
 }
 body{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: black;
-    display: grid;
+    background-color: rgb(0, 0, 0);
     color: white;
-}
-#sumbitContauner{
-
-}
-#sumbitButton{
-    border: 10px solid;
-    text-align: center;
-    font-size: 30px;
-    padding: 30px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-#searchContainer{
-
-}
-#searchButton{
-    border: 10px solid;
-    text-align: center;
-    font-size: 30px;
-    padding: 30px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-#booksContainer{
-    border: 10px solid;
-    width: 90%;
-    height: 1000px;
-    margin-top: 50px;
     display: flex;
     flex-direction: column;
+    margin: 0px;
+    height: 100%;
 }
-#container{
-    padding: 10px;
-    background-color: gray;
-    margin: 20px;
-    display: flex;
-    flex-direction: row;
-    border: 5px solid;
-    height: 20px;
-    width: 100%;
+h1,h2,p{
+    margin: 0px;
 }
-#delete{
-    background-color: red;
-    border: 1px solid;
+h1{
+    color: red;
+    font-size: 700%;
     text-align: center;
-    font-size: 18px;
 }
-#borrow{
-    background-color: orange;
-    border: 1px solid;
-    text-align: center;
-    font-size: 18px;
+h2{
+    color: orange;
+    font-size: 70px;
 }
-#complete{
-    background-color: rgb(60, 0, 255);
-    border: 10px solid;
+footer{
+    flex: 0 0 10%; 
+    background-color: rebeccapurple;
+    flex:1;
     text-align: center;
-    font-size: 30px;
-    padding: 30px;
-    width: 50px;
 }

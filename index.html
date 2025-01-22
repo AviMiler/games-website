@@ -1,13 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>דוגמה פשוטה</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Game Zone</title>
+    <link rel="stylesheet" href="css\main.css" />
+    <link rel="stylesheet" href="css\index.css" />
   </head>
   <body>
-    <h1>משחק זיכרון</h1>
-    
-    <script src="script.js"></script>
-   
+    <header>
+      <h1>Game Zone</h1>
+    </header>
+
+    <main>
+      <div id="enterence">
+        <h2>welcome</h2>
+      </div>
+      <div id="loginWindow">
+        <div id="inputs">
+          <form>
+            <label for="userName">user name:</label><br />
+            <input
+              type="text"
+              id="userName"
+              name="fname"
+              placeholder="Enter name"
+            /><br />
+            <label for="password">password:</label><br />
+            <input
+              type="password"
+              id="password"
+              name="lname"
+              placeholder="Enter password"
+            />
+          </form>
+        </div>
+        <div id="buttons">
+          <div id="login" class="button">
+            <p>login</p>
+          </div>
+          <div id="signup" class="button">
+            <p>sign up</p>
+          </div>
+        </div>
+        <script src="JS\index.js"></script>
+      </div>
+    </main>
+
+    <footer>
+      <p>כל הזכויות שמורות</p>
+    </footer>
   </body>
 </html>
