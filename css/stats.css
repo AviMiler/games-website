@@ -1,0 +1,41 @@
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 80%;
+  justify-content: center;
+  align-items: center;
+}
+#menu {
+  background-image: url("/res/bg/bg1.jpg");
+  border: 2px solid palevioletred;
+  padding: 4%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+}
+#exit {
+  justify-self: center;
+  margin-bottom: 0px;
+  text-align: center;
+  width: 30%;
+  background-color: orange;
+  font-size: 3vh;
+  padding: 10px;
+}
+table {
+  margin-top: 0px;
+}
+td {
+  height: 7vh;
+  width: 30vh;
+  font-size: 4vh;
+  text-align: center;
+  border: 1px solid palevioletred;
+}
+th {
+  background-color: palevioletred;
+  height: 5vh;
+}

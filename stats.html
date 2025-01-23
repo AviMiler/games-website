@@ -1,13 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="he" dir="rtl">
   <head>
-    <title>דוגמה פשוטה</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Game Zone</title>
+    <link rel="stylesheet" href="css\main.css" />
+    <link rel="stylesheet" href="css\stats.css" />
   </head>
   <body>
-    <h1>משחק זיכרון</h1>
-    
-    <script src="script.js"></script>
-   
+    <header>
+      <h1>סטטיסטיקות</h1>
+    </header>
+
+    <main>
+      <div id="menu">
+        <table id="player1Table">
+          <h2 id="player1Name"></h2>
+          <thead>
+            <tr>
+              <th>קטגוריה</th>
+              <th>נתון</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>מספר המשחקים הקלים</td>
+              <td id="numOfEasy"></td>
+            </tr>
+            <tr>
+              <td>מספר המשחקים הבינוניים</td>
+              <td id="numOfMedium"></td>
+            </tr>
+            <tr>
+              <td>מספר המשחקים הקשים</td>
+              <td id="numOfHard"></td>
+            </tr>
+            <tr>
+              <td>סך המשחקים</td>
+              <td id="totalGames"></td>
+            </tr>
+            <tr>
+              <td>ניקוד</td>
+              <td id="totalScore"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="exit">יציאה</div>
+    </main>
+
+    <footer>
+      <p>כל הזכויות שמורות</p>
+    </footer>
+
+    <script src="JS\stats.js"></script>
   </body>
 </html>

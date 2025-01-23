@@ -11,18 +11,26 @@
     </header>
 
     <main>
-      <div id="data">
-        <div id="timer">time</div>
-        <div id="attempts"></div>
+      <div id="theGame">
+        <div id="data">
+          <div id="timer" class="data">time: 0</div>
+          <div id="scoreWindow" class="data">score: 0</div>
+          <div id="attempts" class="data">attempts: 0</div>
+        </div>
+        <div id="gameWindow"></div>
+        <div id="exit">יציאה</div>
       </div>
-
-      <div id="gameWindow"></div>
     </main>
-
+    <div id="endGame">
+      <div id="message"></div>
+      <button class="menu-button" id="toMenu">תפריט</button>
+      <button class="menu-button" id="stat">סטטיסטיקות</button>
+      <button class="menu-button" id="restart">חדש</button>
+    </div>
     <footer>
       <p>כל הזכויות שמורות</p>
     </footer>
-
-    <script src="script.js"></script>
+    <script type="module" src="fireWorks.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

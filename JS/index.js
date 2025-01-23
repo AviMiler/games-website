@@ -38,6 +38,14 @@ function login() {
   }
 
   if (lisOfUsers[userIndex].password == logPassword) {
+    sessionStorage.setItem(
+      "player1",
+      JSON.stringify(getUsersData()[userIndex])
+    );
+    sessionStorage.setItem(
+      "gameInProgress",
+      JSON.stringify([0, false, false, false])
+    );
     window.location.href = "menu.html";
   } else {
     alert("the password is incorrect");
@@ -49,6 +57,7 @@ function login() {
 
 function signup() {
   let usersList = getUsersList();
+  let usersData = getUsersData();
   let newName = nameFeild.value;
   let newPassword = passwordFeild.value;
 
@@ -58,15 +67,24 @@ function signup() {
   }
 
   let indexToSet = findIndexToSet(newName, usersList);
-
+  let newUser = { name: newName, password: newPassword };
+  let userDataUnit = {
+    name: newName,
+    score: 0,
+    numOfEasy: 0,
+    numOfMedium: 0,
+    numOfHard: 0,
+  };
   if (indexToSet !== -2) {
     if (indexToSet === -1) {
-      usersList.push({ name: newName, password: newPassword });
+      usersList.push(newUser);
+      usersData.push(userDataUnit);
     } else {
-      usersList.splice(indexToSet, 0, { name: newName, password: newPassword });
+      usersList.splice(indexToSet, 0, newUser);
+      usersData.splice(indexToSet, 0, userDataUnit);
     }
-    localStorage.clear();
     localStorage.setItem("usersList", JSON.stringify(usersList));
+    localStorage.setItem("usersData", JSON.stringify(usersData));
   }
 }
 
@@ -95,4 +113,11 @@ function getUsersList() {
     return [];
   }
   return JSON.parse(localStorage.getItem("usersList"));
+}
+
+function getUsersData() {
+  if (localStorage.length === 0) {
+    return [];
+  }
+  return JSON.parse(localStorage.getItem("usersData"));
 }
