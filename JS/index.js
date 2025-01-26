@@ -2,6 +2,7 @@ let loginButton = document.getElementById("login");
 let signUpButton = document.getElementById("signup");
 let nameFeild = document.getElementById("userName");
 let passwordFeild = document.getElementById("password");
+let massege = document.getElementById("massege");
 
 loginButton.addEventListener("click", function (event) {
   login();
@@ -11,6 +12,13 @@ signUpButton.addEventListener("click", function (event) {
   signup();
 });
 
+nameFeild.addEventListener("input", (event) => {
+  document.getElementById("userNameLabel").style.color = "white";
+});
+
+passwordFeild.addEventListener("input", (event) => {
+  document.getElementById("passwordLabel").style.color = "white";
+});
 //////////////     log in     //////////////
 
 function login() {
@@ -18,13 +26,12 @@ function login() {
   let logName = nameFeild.value;
   let logPassword = passwordFeild.value;
 
-  if (logName.length === 0 || logPassword.length === 0) {
-    alert("missing parameters");
+  if (!checkMissing(logName, logPassword)) {
     return;
   }
 
   if (lisOfUsers === undefined) {
-    alert("user dosen't exist please sign up");
+    warning("user dosen't exist please sign up");
     return;
   }
 
@@ -33,7 +40,7 @@ function login() {
   });
 
   if (userIndex == -1) {
-    alert("user does not exist please sign up");
+    warning("user does not exist please sign up");
     return;
   }
 
@@ -42,13 +49,14 @@ function login() {
       "player1",
       JSON.stringify(getUsersData()[userIndex])
     );
+    sessionStorage.setItem("player1Index", JSON.stringify(userIndex));
     sessionStorage.setItem(
       "gameInProgress",
       JSON.stringify([0, false, false, false])
     );
     window.location.href = "menu.html";
   } else {
-    alert("the password is incorrect");
+    warning("the password is incorrect");
     return;
   }
 }
@@ -61,8 +69,7 @@ function signup() {
   let newName = nameFeild.value;
   let newPassword = passwordFeild.value;
 
-  if (newName.length === 0 || newPassword.length === 0) {
-    alert("missing parameters");
+  if (!checkMissing(newName, newPassword)) {
     return;
   }
 
@@ -86,6 +93,7 @@ function signup() {
     localStorage.setItem("usersList", JSON.stringify(usersList));
     localStorage.setItem("usersData", JSON.stringify(usersData));
   }
+  goodMessage("signup successfuly");
 }
 
 function findIndexToSet(newUser, usersList) {
@@ -99,7 +107,7 @@ function findIndexToSet(newUser, usersList) {
 
   if (index !== -1) {
     if (usersList[index].name === newUser) {
-      alert("user name allredy exist");
+      warning("user name allredy exist");
       return -2;
     }
   }
@@ -120,4 +128,30 @@ function getUsersData() {
     return [];
   }
   return JSON.parse(localStorage.getItem("usersData"));
+}
+
+function checkMissing(newName, newPassword) {
+  let status = true;
+  if (newName.length === 0) {
+    document.getElementById("userNameLabel").style.color = "red";
+    warning("missing user name");
+    status = false;
+  }
+  if (newPassword.length === 0) {
+    document.getElementById("passwordLabel").style.color = "red";
+    if (status == false) {
+      warning("missing parameters");
+    } else warning("missing password");
+    status = false;
+  }
+  return status;
+}
+
+function warning(text) {
+  massege.style.color = "red";
+  massege.textContent = text;
+}
+function goodMessage(text) {
+  massege.style.color = "green";
+  massege.textContent = text;
 }

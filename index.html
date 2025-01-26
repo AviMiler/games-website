@@ -17,22 +17,25 @@
       <div id="loginWindow">
         <div id="inputs">
           <form>
-            <label for="userName">user name:</label><br />
+            <label for="userName" id="userNameLabel">user name:</label><br />
             <input
               type="text"
               id="userName"
               name="fname"
               placeholder="Enter name"
+              required
             /><br />
-            <label for="password">password:</label><br />
+            <label for="password" id="passwordLabel">password:</label><br />
             <input
               type="password"
               id="password"
               name="lname"
               placeholder="Enter password"
+              required
             />
           </form>
         </div>
+        <div id="massege"></div>
         <div id="buttons">
           <div id="login" class="button">
             <p>login</p>

@@ -249,6 +249,9 @@ function saveplayerData() {
       break;
   }
   sessionStorage.setItem("player1", JSON.stringify(playerData));
+  let allData = JSON.parse(localStorage.getItem("usersData"));
+  allData[JSON.parse(sessionStorage.getItem("player1Index"))] = playerData;
+  localStorage.setItem("usersData", JSON.stringify(allData));
 }
 
 ///////////  services  ///////////

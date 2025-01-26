@@ -12,3 +12,7 @@ document.getElementById("totalScore").textContent = player1Data.score;
 document.getElementById("exit").addEventListener("click", function (event) {
   window.location.href = "/menu.html";
 });
+document.getElementById("logout").addEventListener("click", function (event) {
+  sessionStorage.clear();
+  window.location.href = "index.html";
+});

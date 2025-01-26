@@ -13,3 +13,7 @@ document.getElementById("hard").addEventListener("click", function (event) {
 document.getElementById("stat").addEventListener("click", function (event) {
   window.location.href = "stats.html";
 });
+document.getElementById("logout").addEventListener("click", function (event) {
+  sessionStorage.clear();
+  window.location.href = "index.html";
+});
