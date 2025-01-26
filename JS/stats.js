@@ -1,14 +1,14 @@
-let player1Data = JSON.parse(sessionStorage.getItem("player1"));
+let playerData = JSON.parse(sessionStorage.getItem("players"));
 
-console.log(player1Data);
+console.log(playerData);
 
-document.getElementById("player1Name").textContent = player1Data.name;
-document.getElementById("numOfEasy").textContent += player1Data.numOfEasy;
-document.getElementById("numOfMedium").textContent = player1Data.numOfMedium;
-document.getElementById("numOfHard").textContent = player1Data.numOfHard;
+document.getElementById("player1Name").textContent = playerData[1].name;
+document.getElementById("numOfEasy").textContent += playerData[1].numOfEasy;
+document.getElementById("numOfMedium").textContent = playerData[1].numOfMedium;
+document.getElementById("numOfHard").textContent = playerData[1].numOfHard;
 document.getElementById("totalGames").textContent =
-  player1Data.numOfEasy + player1Data.numOfMedium + player1Data.numOfHard;
-document.getElementById("totalScore").textContent = player1Data.score;
+  playerData[1].numOfEasy + playerData[1].numOfMedium + playerData[1].numOfHard;
+document.getElementById("totalScore").textContent = playerData[1].score;
 document.getElementById("exit").addEventListener("click", function (event) {
   window.location.href = "/menu.html";
 });

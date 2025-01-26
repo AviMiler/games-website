@@ -53,6 +53,9 @@ main {
   font-size: 3vh;
   padding: 10px;
 }
+.a {
+  background-color: red;
+}
 #gameWindow {
   background-image: url("/res/bg/bg1.jpg");
   border: 2px solid palevioletred;
@@ -75,6 +78,17 @@ main {
   align-items: center;
   background-color: bisque;
 }
+.card-back {
+  aspect-ratio: 1;
+  font-family: "Courier New", Courier, monospace;
+  background-color: cadetblue;
+  color: orange;
+  display: flex;
+  font-size: 5vw;
+  justify-content: center;
+  align-items: center;
+}
+
 .solvedCard {
   opacity: 0;
 }

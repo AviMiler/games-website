@@ -46,9 +46,10 @@ function login() {
 
   if (lisOfUsers[userIndex].password == logPassword) {
     sessionStorage.setItem(
-      "player1",
-      JSON.stringify(getUsersData()[userIndex])
+      "players",
+      JSON.stringify([0, getUsersData()[userIndex]])
     );
+    sessionStorage.setItem("numOfPlayers", JSON.stringify(1));
     sessionStorage.setItem("player1Index", JSON.stringify(userIndex));
     sessionStorage.setItem(
       "gameInProgress",
@@ -92,8 +93,8 @@ function signup() {
     }
     localStorage.setItem("usersList", JSON.stringify(usersList));
     localStorage.setItem("usersData", JSON.stringify(usersData));
+    goodMessage("signup successfuly");
   }
-  goodMessage("signup successfuly");
 }
 
 function findIndexToSet(newUser, usersList) {
@@ -152,6 +153,6 @@ function warning(text) {
   massege.textContent = text;
 }
 function goodMessage(text) {
-  massege.style.color = "green";
+  massege.style.color = "greenyellow";
   massege.textContent = text;
 }

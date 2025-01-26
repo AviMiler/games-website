@@ -13,11 +13,12 @@ let gameData = {
   timerId: 0,
   gameScore: 0,
   gameInProgress: 0,
+  numOfPlayers: JSON.parse(sessionStorage.getItem("numOfPlayers")),
 };
 let greetings = ["!!כל הכבוד", "!!איזה זיכרון", "!!מצויין", "!!אלוף"];
 let indexes = [];
 const gameWindow = document.getElementById("gameWindow");
-let player1 = JSON.parse(sessionStorage.getItem("player1"));
+let players = JSON.parse(sessionStorage.getItem("players"));
 const timerWindow = document.getElementById("timer");
 const attemptsWindow = document.getElementById("attempts");
 const scoreWindow = document.getElementById("scoreWindow");
@@ -38,8 +39,10 @@ document.getElementById("exit").addEventListener("click", function (event) {
 
 class card {
   constructor(element, value) {
-    this.element = element;
     this.value = value;
+    this.element = element;
+    this.back = MyCreateElement("card-back", "div");
+    this.back.textContent = this.value;
     this.solved = false;
     this.choosen = false;
     this.text = "?";
@@ -118,6 +121,7 @@ function getRandomPosition() {
 async function chooseCard(cardObj) {
   setGameInProgress(true);
   if (!cardObj.solved && !cardObj.choosen && !gameData.stop) {
+    flipToBack(cardObj.element);
     cardObj.choosen = true;
     cardObj.text = cardObj.value;
     cardObj.element.textContent = cardObj.text;
@@ -142,7 +146,16 @@ async function chooseCard(cardObj) {
       pickedCards.length = 0;
     }
   }
+
   saveProgress();
+}
+
+async function flipToBack(card) {
+  card.classList = "card-back";
+}
+
+function flipToFront(card) {
+  card.classList = "card";
 }
 
 function saveProgress() {
@@ -214,6 +227,7 @@ function coupleUnSolved() {
   pickedCards.map((card) => {
     card.text = "?";
     card.element.textContent = card.text;
+    flipToFront(card.element);
     card.choosen = false;
   });
 }
@@ -235,7 +249,6 @@ function handleEnd() {
 
 function saveplayerData() {
   let playerData = getUserData();
-  console.log(playerData);
   playerData.score += gameData.gameScore;
   switch (gameData.level) {
     case 1:
@@ -248,7 +261,9 @@ function saveplayerData() {
       playerData.numOfHard++;
       break;
   }
-  sessionStorage.setItem("player1", JSON.stringify(playerData));
+  let players = JSON.parse(sessionStorage.getItem("players"));
+  players[1] = playerData;
+  sessionStorage.setItem("players", JSON.stringify(players));
   let allData = JSON.parse(localStorage.getItem("usersData"));
   allData[JSON.parse(sessionStorage.getItem("player1Index"))] = playerData;
   localStorage.setItem("usersData", JSON.stringify(allData));
@@ -281,5 +296,5 @@ function getRandomInRange(min, max) {
 }
 
 function getUserData() {
-  return JSON.parse(sessionStorage.getItem("player1"));
+  return JSON.parse(sessionStorage.getItem("players"))[1];
 }
